@@ -1,0 +1,9 @@
+<h3> Transportadora <%= @carrier.brand_name %> </h3>
+<h5> <%= @carrier.corporate_name %> </h5>
+
+<dl>
+  <dt>Documento:</dt>
+  <dd> <%=@carrier.registration_number%> </dd>
+  <dt>Endereço:</dt>
+  <dd> <%=@carrier.full_address%> - <%=@carrier.city%> - <%=@carrier.state%> </dd>
+</dl>

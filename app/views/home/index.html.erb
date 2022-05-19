@@ -1,2 +1,21 @@
-<h3>Empresa especializada em gestão de transportadoras</h3>
+<h5>Empresa especializada em gestão de transportadoras</h5>
+<div>
+    <%= link_to('Cadastrar Transportadora', new_carrier_path)%>
+</div>
+<h3>Lista das Melhores Empresas de Transportadoras do Brasil</h3>
+
+<% @carriers.each do |c| %>
+  <div>
+    <strong><h4><%= link_to c.brand_name, carrier_path(c) %></h4></strong>   
+    <dl>
+      <dt>Sede:</dt>
+      <dd><%= c.city %> - <%= c.state %></dd>
+    </dl>
+  </div> 
+<% end %>
+
+<% if @carriers.empty? %>
+  <p>Não existem transportadoras cadastradas</p>
+<% end %>
+
 
