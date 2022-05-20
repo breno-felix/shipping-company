@@ -2,6 +2,7 @@ pt-BR:
   activerecord:
     models:
       carrier: 'Transportadora'
+      price: 'Preço'
     attributes:
       carrier:
         corporate_name: 'Razão Social'
@@ -12,4 +13,7 @@ pt-BR:
         state: 'Estado'
         email_domain: 'Domínio do E-mail'
         status: situação
-
+      price:
+        final_volume: 'Volume Final'
+        final_weight: 'Peso Final'
+        price_km: 'Valor por Km'

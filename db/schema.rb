@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_19_025212) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_19_230048) do
   create_table "carriers", force: :cascade do |t|
     t.string "brand_name"
     t.string "corporate_name"
@@ -24,4 +24,39 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_025212) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "price_volumes", force: :cascade do |t|
+    t.integer "initial_volume", default: 0
+    t.integer "final_volume"
+    t.integer "price"
+    t.integer "carrier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_price_volumes_on_carrier_id"
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.integer "initial_volume", default: 0
+    t.integer "final_volume"
+    t.integer "initial_weight", default: 0
+    t.integer "final_weight"
+    t.integer "price_km"
+    t.integer "carrier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_prices_on_carrier_id"
+  end
+
+  create_table "volumes", force: :cascade do |t|
+    t.integer "initial_volume", default: 0
+    t.integer "final_volume"
+    t.integer "price_km"
+    t.integer "carrier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_volumes_on_carrier_id"
+  end
+
+  add_foreign_key "price_volumes", "carriers"
+  add_foreign_key "prices", "carriers"
+  add_foreign_key "volumes", "carriers"
 end

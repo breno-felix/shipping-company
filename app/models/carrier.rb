@@ -1,4 +1,6 @@
 class Carrier < ApplicationRecord
+  has_many :prices
+  has_many :prices_volumes
   enum status: { enabled: 0, disabled: 5 }
   validates :corporate_name, :brand_name, :registration_number, :full_address, :city, :state,
             :email_domain, presence: true

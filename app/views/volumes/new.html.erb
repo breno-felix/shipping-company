@@ -1,0 +1,40 @@
+<h3>Cadastrar Preços: para intervalo do volume:</h3> 
+
+<%= form_with(model: [:carrier, @price]) do |f|%>
+  Volume inicial <%=@initial_volume%>
+  <div>
+    <%= f.label :final_volume, 'Volume Final' %>
+    <%= f.text_field :final_volume%>
+  </div>
+  <div>
+    <%= f.label :price_km, 'Valor por Km' %>
+    <%= f.text_field :price_km%>
+  </div>
+  <div>
+    <%= f.submit 'Cadastrar'%>
+  </div>
+<% end %>
+
+<h3>Tabela de preços por intervalos de volume</h3>
+<% if @price_volumes.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Volume Inicial</th>
+        <th>Volume Final</th>
+        <th>Valor por Km</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @price_volumes.each do |p| %>
+      <tr>
+        <td> <%= p.initial_volume %> </td>
+        <td> <%= p.final_volume %> </td>
+        <td> <%= p.price_km %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p> Não existem preços por intervalo de volume cadastrados. </p>
+<% end %>
