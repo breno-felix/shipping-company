@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     resources :volumes, only: [:new, :create]
     resources :weights, only: [:new, :create]
     resources :kilometers, only: [:new, :create]
+    resources :deadlines, only: [:index, :new, :create]
   end
 end

@@ -1,0 +1,54 @@
+<h3>
+  <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
+</h3>
+
+<% if(@deadline.errors.any?) %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @deadline.errors.full_messages.each do |msg| %>
+      <li> <%=msg%> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h3> Cadastrar Prazos: para intervalo de Km </h3> 
+
+<%= form_with(model: [:carrier, @deadline]) do |f|%>
+  Km Inicial <%=@initial_kilometer%>
+  <div>
+    <%= f.label :final_kilometer %>
+    <%= f.text_field :final_kilometer%>
+  </div>
+  <div>
+    <%= f.label :deadline %>
+    <%= f.text_field :deadline%>
+  </div>
+  <div>
+    <%= f.submit 'Cadastrar'%>
+  </div>
+<% end %>
+
+<h3>Tabela de prazos por intervalos de Km</h3>
+
+<% if @deadlines.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Km Inicial</th>
+        <th>Km Final</th>
+        <th>Valor Mínimo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @deadlines.each do |p| %>
+      <tr>
+        <td> <%= p.initial_kilometer %> </td>
+        <td> <%= p.final_kilometer %> </td>
+        <td> <%= p.deadline %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p> Não existem prazos por intervalo de Km cadastrados. </p>
+<% end %>

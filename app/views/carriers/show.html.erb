@@ -1,5 +1,7 @@
 <h4>
-  <%= link_to 'Preços', carrier_prices_path(@carrier) %> 
+  <%= link_to 'Preços', carrier_prices_path(@carrier) %>
+  |
+  <%= link_to 'Prazos', carrier_deadlines_path(@carrier) %> 
 </h4>
 
 <h3> Transportadora <%= @carrier.brand_name %> </h3>

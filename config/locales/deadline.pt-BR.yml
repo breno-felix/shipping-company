@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      deadline: 'Prazo por Km'
+    attributes:
+      deadline:
+        initial_kilometer: 'Km Inicial'
+        final_kilometer: 'Km Final'
+        deadline: 'Prazo' 

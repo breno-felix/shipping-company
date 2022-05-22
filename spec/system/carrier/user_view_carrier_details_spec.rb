@@ -13,6 +13,7 @@ describe 'Usuário vê detalhes da transportadora' do
     # Assert
     
     expect(page).to have_link('Preços', href: carrier_prices_path(Carrier.find_by(brand_name: 'RV Express')))
+    expect(page).to have_link('Prazo', href: carrier_deadlines_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_content('Transportadora RV Express')
     expect(page).to have_content('RV Express LTDA')
     expect(page).to have_content('Documento: 19950592000130')
