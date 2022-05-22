@@ -2,7 +2,7 @@
   <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
 </h3>
 
-<h3>Cadastrar Preços: para intervalo de volume</h3> 
+<h3>Cadastrar Preços: para intervalo de peso:</h3> 
 
 <% if(@price.errors.any?) %>
   <p>Verifique os erros abaixo:</p>
@@ -14,10 +14,10 @@
 <% end %>
 
 <%= form_with(model: [:carrier, @price]) do |f|%>
-  Volume Inicial <%=@initial_volume%>
+  Peso Inicial <%=@initial_weight%>
   <div>
-    <%= f.label :final_volume %>
-    <%= f.text_field :final_volume%>
+    <%= f.label :final_weight %>
+    <%= f.text_field :final_weight%>
   </div>
   <div>
     <%= f.label :price_km %>
@@ -28,26 +28,26 @@
   </div>
 <% end %>
 
-<h3>Tabela de preços por intervalos de volume</h3>
-<% if @price_volumes.any? %>
+<h3>Tabela de preços por intervalos de peso</h3>
+<% if @price_weights.any? %>
   <table>
     <thead>
       <tr>
-        <th>Volume Inicial</th>
-        <th>Volume Final</th>
+        <th>Peso Inicial</th>
+        <th>Peso Final</th>
         <th>Valor por Km</th>
       </tr>
     </thead>
     <tbody>
-      <% @price_volumes.each do |p| %>
+      <% @price_weights.each do |p| %>
       <tr>
-        <td> <%= p.initial_volume %> </td>
-        <td> <%= p.final_volume %> </td>
+        <td> <%= p.initial_weight %> </td>
+        <td> <%= p.final_weight %> </td>
         <td> <%= p.price_km %> </td>
       </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <p> Não existem preços por intervalo de volume cadastrados. </p>
+  <p> Não existem preços por intervalo de peso cadastrados. </p>
 <% end %>

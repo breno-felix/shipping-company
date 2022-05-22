@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root to: 'home#index'
   resources :carriers, only: [:new, :create, :show] do
-    resources :prices, only: [:new, :create, :show]
+    resources :prices, only: [:index]
     resources :volumes, only: [:new, :create]
+    resources :weights, only: [:new, :create]
+    resources :kilometers, only: [:new, :create]
   end
 end

@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      kilometer: 'Preço Mínimo por Km'
+    attributes:
+      kilometer:
+        initial_kilometer: 'Km Inicial'
+        final_kilometer: 'Km Final'
+        price_km: 'Valor Mínimo' 

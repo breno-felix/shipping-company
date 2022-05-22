@@ -1,21 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe Volume, type: :model do
+RSpec.describe Kilometer, type: :model do
   describe '#valid?' do
     context 'required attributes' do
-      it 'false when final_volume is empty' do
+      it 'false when final_kilometer is empty' do
         # Arrange
-        price = Volume.new(final_volume: '')
+        price = Kilometer.new(final_kilometer: '')
         # Act
         price.valid?
-        result = price.errors.include?(:final_volume) 
+        result = price.errors.include?(:final_kilometer) 
         # Assert
         expect(result).to be true
       end
     
       it 'false when price_km is empty' do
         # Arrange
-        price = Volume.new(price_km: '')
+        price = Kilometer.new(price_km: '')
         # Act
         price.valid?
         result = price.errors.include?(:price_km) 
@@ -23,41 +23,41 @@ RSpec.describe Volume, type: :model do
         expect(result).to be true
       end
 
-      it 'false when initial_volume is empty' do
+      it 'false when initial_kilometer is empty' do
         # Arrange
-        price = Volume.new(initial_volume: '')
+        price = Kilometer.new(initial_kilometer: '')
         # Act
         price.valid?
-        result = price.errors.include?(:initial_volume) 
+        result = price.errors.include?(:initial_kilometer) 
         # Assert
         expect(result).to be true
       end
     end
 
     context 'definitions for numeric attributes' do 
-      it "false when initial_volume is not just numeric digits" do
+      it "false when initial_kilometer is not just numeric digits" do
          # Arrange
-         price = Volume.new(initial_volume: 'abc10')
+         price = Kilometer.new(initial_kilometer: 'abc10')
          # Act
          price.valid?
-         result = price.errors.include?(:initial_volume) 
+         result = price.errors.include?(:initial_kilometer) 
          # Assert
          expect(result).to be true
       end
 
-      it "false when final_volume is not just numeric digits" do
+      it "false when final_kilometer is not just numeric digits" do
         # Arrange
-        price = Volume.new(final_volume: 'abc10')
+        price = Kilometer.new(final_kilometer: 'abc10')
         # Act
         price.valid?
-        result = price.errors.include?(:final_volume) 
+        result = price.errors.include?(:final_kilometer) 
         # Assert
         expect(result).to be true
       end
 
       it "false when price_km is not just numeric digits" do
         # Arrange
-        price = Volume.new(price_km: 'abc10')
+        price = Kilometer.new(price_km: 'abc10')
         # Act
         price.valid?
         result = price.errors.include?(:price_km) 
@@ -67,7 +67,7 @@ RSpec.describe Volume, type: :model do
 
       it "false when price_km is less than 0" do
         # Arrange
-        price = Volume.new(price_km: '-3')
+        price = Kilometer.new(price_km: '-3')
         # Act
         price.valid?
         result = price.errors.include?(:price_km) 
@@ -75,16 +75,15 @@ RSpec.describe Volume, type: :model do
         expect(result).to be true
       end
 
-      it "false when final_volume is less than initial_volume" do
+      it "false when final_kilometer is less than initial_kilometer" do
         # Arrange
-        price = Volume.new(final_volume: '3',initial_volume: '4')
+        price = Kilometer.new(final_kilometer: '3',initial_kilometer: '4')
         # Act
         price.valid?
-        result = price.errors.include?(:final_volume) 
+        result = price.errors.include?(:final_kilometer) 
         # Assert
         expect(result).to be true
       end
-    end  
+    end 
   end
-  
 end

@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 describe 'Usuário visita tela inicial' do
-  it 'e vê o nome da app' do
+  it 'e vê o nome da app e menu' do
     #Arrange (nesse caso pode ficar vazio, pois é o início)
 
     # Act
     visit(root_path)
     # Assert
     expect(page).to have_content('Br Transportadoras')
+    expect(page).to have_link('Br Transportadoras', href: root_path)
     expect(page).to have_content('Empresa especializada em gestão de transportadoras')
+    expect(page).to have_link('Cadastrar Transportadora', href: new_carrier_path)
   end
 
   it 'e vê as transportadoras cadastradas' do
@@ -31,9 +33,9 @@ describe 'Usuário visita tela inicial' do
 
     # Asserts
     expect(page).not_to have_content('Não existem transportadoras cadastradas')
-    expect(page).to have_content('R2 Logistica')
+    expect(page).to have_link('R2 Logistica', href: carrier_path(Carrier.find_by(brand_name: 'R2 Logistica')))
     expect(page).to have_content('Sede: Fortaleza - CE')
-    expect(page).to have_content('RV Express')
+    expect(page).to have_link('RV Express', href: carrier_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_content('Sede: Cachoeirinha - RS')
     expect(page).not_to have_content('LT LOG')
     expect(page).not_to have_content('Sede: Nova Iguaçu - RJ')

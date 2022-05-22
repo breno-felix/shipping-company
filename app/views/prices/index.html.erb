@@ -1,0 +1,65 @@
+<h3>
+  <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
+</h3>
+
+<h4>Cadastrar Preços por:
+  <%= link_to 'Volume', new_carrier_volume_path(@carrier) %>
+  |
+  <%= link_to 'Peso', new_carrier_weight_path(@carrier) %>
+  |
+  <%= link_to 'Km', new_carrier_kilometer_path(@carrier) %>
+</h4>
+
+<% if @price_volumes.any? && @price_weights.any? %>
+<h4> <caption> Tabela de preços por intervalos de volume e peso </caption> </h4>
+  <table class="table_price" id="table_price_id">
+    <thead>
+      <tr>
+        <th>Volume Inicial</th>
+        <th>Volume Final</th>
+        <th>Peso Inicial</th>
+        <th>Peso Final</th>
+        <th>Valor por Km</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @price_volumes.each do |v| %>
+        <% @price_weights.each do |w| %>
+          <tr>
+            <td> <%= v.initial_volume %> </td>
+            <td> <%= v.final_volume %> </td>
+            <td> <%= w.initial_weight %> </td>
+            <td> <%= w.final_weight %> </td>
+            <td> <%= v.price_km + w.price_km %> </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p> Não existem preços por intervalos de volumes e pesos cadastrados. </p>
+<% end %>
+
+<% if @price_kilometers.any? %>
+<h4> <caption> Tabela de preços por intervalos de Km </caption> </h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Km Inicial</th>
+        <th>Km Final</th>
+        <th>Valor Mínimo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @price_kilometers.each do |p| %>
+      <tr>
+        <td> <%= p.initial_kilometer %> </td>
+        <td> <%= p.final_kilometer %> </td>
+        <td> <%= p.price_km %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p> Não existem preços por intervalo de Km cadastrados. </p>
+<% end %>

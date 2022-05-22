@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_19_230048) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_22_130110) do
   create_table "carriers", force: :cascade do |t|
     t.string "brand_name"
     t.string "corporate_name"
@@ -22,6 +22,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_230048) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "kilometers", force: :cascade do |t|
+    t.integer "initial_kilometer", default: 0
+    t.integer "final_kilometer"
+    t.integer "price_km"
+    t.integer "carrier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_kilometers_on_carrier_id"
   end
 
   create_table "price_volumes", force: :cascade do |t|
@@ -56,7 +66,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_230048) do
     t.index ["carrier_id"], name: "index_volumes_on_carrier_id"
   end
 
+  create_table "weights", force: :cascade do |t|
+    t.integer "initial_weight"
+    t.integer "final_weight"
+    t.integer "price_km"
+    t.integer "carrier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_weights_on_carrier_id"
+  end
+
+  add_foreign_key "kilometers", "carriers"
   add_foreign_key "price_volumes", "carriers"
   add_foreign_key "prices", "carriers"
   add_foreign_key "volumes", "carriers"
+  add_foreign_key "weights", "carriers"
 end

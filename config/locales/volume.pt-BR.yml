@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      volume: 'Preço por volume'
+    attributes:
+      volume:
+        initial_volume: 'Volume Inicial'
+        final_volume: 'Volume Final'
+        price_km: 'Valor por Km' 

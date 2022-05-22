@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      price: 'Preço'
+    attributes:
+      price:
+        final_volume: 'Volume Final'
+        final_weight: 'Peso Final'
+        price_km: 'Valor por Km' 
