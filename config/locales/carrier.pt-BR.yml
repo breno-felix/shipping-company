@@ -5,10 +5,10 @@ pt-BR:
     attributes:
       carrier:
         corporate_name: 'Razão Social'
-        brand_name: "Nome Fantasia"
+        brand_name: 'Nome Fantasia'
         registration_number: 'CNPJ'
         full_address: 'Endereço'
         city: 'Cidade'
         state: 'Estado'
         email_domain: 'Domínio do E-mail'
-        status: situação
+        status: 'situação'

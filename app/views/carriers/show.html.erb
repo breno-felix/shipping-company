@@ -14,4 +14,12 @@
   <dd> <%=@carrier.registration_number%> </dd>
   <dt>Endereço:</dt>
   <dd> <%=@carrier.full_address%> - <%=@carrier.city%> - <%=@carrier.state%> </dd>
+  <dt>Status:</dt>
+  <dd> <%= I18n.t(@carrier.status) %> </dd>
 </dl>
+
+<% if @carrier.status == 'enabled' %>
+  <%= button_to 'Desativar', disabled_carrier_path, { method: 'patch'} %>
+<% elsif @carrier.status == 'disabled' %>
+  <%= button_to 'Ativar', enabled_carrier_path, { method: 'patch'} %>
+<% end %>

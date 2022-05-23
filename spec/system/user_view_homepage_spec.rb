@@ -37,8 +37,8 @@ describe 'Usuário visita tela inicial' do
     expect(page).to have_content('Sede: Fortaleza - CE')
     expect(page).to have_link('RV Express', href: carrier_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_content('Sede: Cachoeirinha - RS')
-    expect(page).not_to have_content('LT LOG')
-    expect(page).not_to have_content('Sede: Nova Iguaçu - RJ')
+    expect(page).to have_content('LT LOG')
+    expect(page).to have_content('Sede: Nova Iguaçu - RJ')
   end
 
   it 'e não existem transportadoras cadastradas' do

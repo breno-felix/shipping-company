@@ -20,4 +20,16 @@ class CarriersController < ApplicationController
     end
   end
 
+  def disabled
+    @carrier = Carrier.find(params[:id])
+    @carrier.disabled!
+    redirect_to @carrier
+  end
+
+  def enabled
+    @carrier = Carrier.find(params[:id])
+    @carrier.enabled!
+    redirect_to @carrier
+  end
+
 end
