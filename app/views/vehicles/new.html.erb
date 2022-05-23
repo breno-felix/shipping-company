@@ -1,0 +1,40 @@
+<h3>
+  <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
+</h3>
+
+<% if(@vehicle.errors.any?) %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @vehicle.errors.full_messages.each do |msg| %>
+      <li> <%=msg%> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h3> Cadastrar Veículo </h3> 
+
+<%= form_with(model: [:carrier, @vehicle]) do |f|%>
+  <div>
+    <%= f.label :brand %>
+    <%= f.text_field :brand %>
+  </div>
+  <div>
+    <%= f.label :model %>
+    <%= f.text_field :model %>
+  </div>
+  <div>
+    <%= f.label :year %>
+    <%= f.text_field :year %>
+  </div>
+  <div>
+    <%= f.label :plate %>
+    <%= f.text_field :plate %>
+  </div>
+  <div>
+    <%= f.label :capacity %>
+    <%= f.text_field :capacity %>
+  </div>
+  <div>
+    <%= f.submit 'Cadastrar'%>
+  </div>
+<% end %>

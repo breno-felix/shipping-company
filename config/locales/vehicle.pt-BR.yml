@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      vehicle: 'Veículo'
+    attributes:
+      vehicle:
+        brand: 'Marca'
+        model: 'Modelo'
+        year: 'Ano' 
+        plate: 'Placa'
+        capacity: 'Capacidade'

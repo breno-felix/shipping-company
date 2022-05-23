@@ -1,0 +1,23 @@
+<h3>
+  <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
+</h3>
+
+<h4> <%= link_to 'Cadastrar Veículo', new_carrier_vehicle_path(@carrier) %> </h4>
+
+<h3> Lista de Veículos </h3>
+
+<% @vehicles.each do |v| %>
+  <div>
+    <strong><h4> <%= v.brand %> <%= v.model %> - <%= v.year %> </h4></strong>   
+    <dl>
+      <dt>Placa:</dt>
+      <dd> <%= v.plate %> </dd>
+      <dt>Capacidade:</dt>
+      <dd> <%= v.capacity %> Kg </dd>
+    </dl>
+  </div> 
+<% end %>
+
+<% if @vehicles.empty? %>
+  <p>Não existem veículos cadastradas</p>
+<% end %>
