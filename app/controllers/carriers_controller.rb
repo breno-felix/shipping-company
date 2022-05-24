@@ -32,4 +32,8 @@ class CarriersController < ApplicationController
     redirect_to @carrier
   end
 
+  def budget
+
+  end
+
 end

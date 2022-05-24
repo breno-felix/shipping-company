@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @carriers = Carrier.all
+    @carriers = Carrier.enabled
   end
 end

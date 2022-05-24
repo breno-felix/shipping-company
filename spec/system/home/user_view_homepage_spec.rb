@@ -11,6 +11,7 @@ describe 'Usuário visita tela inicial' do
     expect(page).to have_link('Br Transportadoras', href: root_path)
     expect(page).to have_content('Empresa especializada em gestão de transportadoras')
     expect(page).to have_link('Cadastrar Transportadora', href: new_carrier_path)
+    expect(page).to have_link('Fazer Orçamento', href: budget_carriers_path )
   end
 
   it 'e vê as transportadoras cadastradas' do
@@ -37,8 +38,8 @@ describe 'Usuário visita tela inicial' do
     expect(page).to have_content('Sede: Fortaleza - CE')
     expect(page).to have_link('RV Express', href: carrier_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_content('Sede: Cachoeirinha - RS')
-    expect(page).to have_content('LT LOG')
-    expect(page).to have_content('Sede: Nova Iguaçu - RJ')
+    expect(page).not_to have_content('LT LOG')
+    expect(page).not_to have_content('Sede: Nova Iguaçu - RJ')
   end
 
   it 'e não existem transportadoras cadastradas' do

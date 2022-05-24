@@ -8,6 +8,9 @@ describe 'Usuário cadastra uma Transportadora' do
     visit root_path
     click_on 'Cadastrar Transportadora'
     # Assert
+    expect(page).to have_link('Br Transportadoras', href: root_path)
+    expect(page).to have_content('Empresa especializada em gestão de transportadoras')
+    expect(page).to have_content('Cadastro de Transportadora')
     expect(page).to have_field('Nome Fantasia')
     expect(page).to have_field('Razão Social')
     expect(page).to have_field('CNPJ')

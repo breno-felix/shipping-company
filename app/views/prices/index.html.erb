@@ -10,7 +10,7 @@
   <%= link_to 'Km', new_carrier_kilometer_path(@carrier) %>
 </h4>
 
-<% if @price_volumes.any? && @price_weights.any? %>
+<% if @prices.any? %>
 <h4> <caption> Tabela de preços por intervalos de volume e peso </caption> </h4>
   <table class="table_price" id="table_price_id">
     <thead>
@@ -23,16 +23,14 @@
       </tr>
     </thead>
     <tbody>
-      <% @price_volumes.each do |v| %>
-        <% @price_weights.each do |w| %>
-          <tr>
-            <td> <%= v.initial_volume %> </td>
-            <td> <%= v.final_volume %> </td>
-            <td> <%= w.initial_weight %> </td>
-            <td> <%= w.final_weight %> </td>
-            <td> <%= v.price_km + w.price_km %> </td>
-          </tr>
-        <% end %>
+      <% @prices.each do |p| %>
+        <tr>
+          <td> <%= p.initial_volume %> </td>
+          <td> <%= p.final_volume %> </td>
+          <td> <%= p.initial_weight %> </td>
+          <td> <%= p.final_weight %> </td>
+          <td> <%= p.price_km %> </td>
+        </tr>
       <% end %>
     </tbody>
   </table>

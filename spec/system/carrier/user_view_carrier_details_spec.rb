@@ -38,5 +38,16 @@ describe 'Usuário vê detalhes da transportadora' do
 
   end
 
-  
+  it 'e ativa transportadora por um botão' do
+    # Arrange
+    Carrier.create!(corporate_name: 'RV Express LTDA', brand_name: 'RV Express', 
+                     registration_number: '19950592000130', full_address: 'Rua Áustria, 375',
+                     city: 'Cachoeirinha', state: 'RS', email_domain: 'rvexpress.com',
+                     status: 'disabled')
+    # Act
+    visit carrier_path(Carrier.find_by(brand_name: 'RV Express'))
+    click_on 'Ativar'
+    # Assert
+    expect(page).to have_content('Status: Ativada')
+  end
 end

@@ -1,0 +1,26 @@
+<h1>Fazer Orçamento</h1>
+
+<%= form_with(url: budget_carriers_path, method: :get) do |f| %>
+  <div>
+    <%= f.label :height, 'Altura do Item' %>
+    <%= f.text_field :height %>
+  </div>
+  <div>
+    <%= f.label :width, 'Largura do Item' %>
+    <%= f.text_field :width %>
+  </div>
+  <div>
+    <%= f.label :depth, 'Profundidade do Item' %>
+    <%= f.text_field :depth %>
+  </div>
+  <div>
+    <%= f.label :weight, 'Peso do Item' %>
+    <%= f.text_field :weight %>
+  </div>
+  <div>
+    <%= f.label :distance, 'Distância' %>
+    <%= f.text_field :distance %>
+  </div>
+    <%= f.submit 'Enviar' %>
+
+<% end %>
