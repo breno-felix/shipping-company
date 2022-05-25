@@ -3,24 +3,59 @@
 <%= form_with(url: budget_carriers_path, method: :get) do |f| %>
   <div>
     <%= f.label :height, 'Altura do Item' %>
-    <%= f.text_field :height %>
+    <%= f.number_field :height %>
   </div>
   <div>
     <%= f.label :width, 'Largura do Item' %>
-    <%= f.text_field :width %>
+    <%= f.number_field :width %>
   </div>
   <div>
     <%= f.label :depth, 'Profundidade do Item' %>
-    <%= f.text_field :depth %>
+    <%= f.number_field :depth %>
   </div>
   <div>
     <%= f.label :weight, 'Peso do Item' %>
-    <%= f.text_field :weight %>
+    <%= f.number_field :weight %>
   </div>
   <div>
     <%= f.label :distance, 'Distância' %>
-    <%= f.text_field :distance %>
+    <%= f.number_field :distance %>
   </div>
     <%= f.submit 'Enviar' %>
 
 <% end %>
+
+<% if @count == 1%>
+  <p> <%= @count %> resultado encontrado para: </p>
+<% elsif @count > 1%>
+  <p> <%= @count %> resultados encontrados para: </p>
+<% end %>
+
+
+
+<% if @prices.any? %>
+  <h3> Orçamento para frete de <%= @distance %>Km de distância com item de <%= @volume %>m² e <%= @weight %>Kg </h3>
+  <% @prices.each do |p| %>
+    <% carrier = p.carrier %>
+    <% price_min = @distances.find_by(carrier: carrier).price_km %>
+    <% price = p.price_km * @distance %>
+    <div>
+      <dl>
+        <% if price >= price_min %>
+          <dt><strong> Valor: <%= price %> </strong></dt>
+        <% else %>
+          <dt><strong> Valor: <%= price_min %> </strong></dt>
+        <% end %>
+      
+        <dd><strong> <%= link_to carrier.brand_name, carrier_path(carrier) %> </strong></dd>
+        <dd> Sede: <%= carrier.city %> - <%= carrier.state %> </dd>
+        <dd> Documento: <%= carrier.registration_number %> </dd>
+      </dl>
+    </div> 
+  <% end %>
+<% else %>
+  <p>Não existem orçamentos definidos</p>
+<% end %>
+
+  
+

@@ -33,7 +33,27 @@ class CarriersController < ApplicationController
   end
 
   def budget
+    @height = params["height"].to_i
+    @width = params["width"].to_i
+    @depth = params["depth"].to_i
+    @weight = params["weight"].to_i
+    @distance = params["distance"].to_i
+    @volume = volume
 
+    @prices = Price.where("initial_volume < :volume AND final_volume >= :volume AND
+                          initial_weight < :weight AND final_weight >= :weight", 
+                          {volume: @volume, weight: @weight})
+    @distances = Kilometer.where("initial_kilometer < :distance AND final_kilometer >= :distance", 
+                          {distance: @distance})
+
+    @count = @prices.count
+
+  end
+
+  private
+
+  def volume
+    @height * @width * @depth
   end
 
 end
