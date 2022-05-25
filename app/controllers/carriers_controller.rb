@@ -40,10 +40,12 @@ class CarriersController < ApplicationController
     @distance = params["distance"].to_i
     @volume = volume
 
-    @prices = Price.where("initial_volume < :volume AND final_volume >= :volume AND
-                          initial_weight < :weight AND final_weight >= :weight", 
+    @prices = Price.includes(:carrier).where(carrier: {status: "enabled"}).where("initial_volume < :volume AND
+                          final_volume >= :volume AND initial_weight < :weight AND final_weight >= :weight", 
                           {volume: @volume, weight: @weight})
     @distances = Kilometer.where("initial_kilometer < :distance AND final_kilometer >= :distance", 
+                          {distance: @distance})
+    @deadlines = Deadline.where("initial_kilometer < :distance AND final_kilometer >= :distance", 
                           {distance: @distance})
 
     @count = @prices.count

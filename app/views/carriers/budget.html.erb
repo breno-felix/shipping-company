@@ -37,6 +37,7 @@
   <h3> Orçamento para frete de <%= @distance %>Km de distância com item de <%= @volume %>m² e <%= @weight %>Kg </h3>
   <% @prices.each do |p| %>
     <% carrier = p.carrier %>
+    <% deadline = @deadlines.find_by(carrier: carrier).deadline %>
     <% price_min = @distances.find_by(carrier: carrier).price_km %>
     <% price = p.price_km * @distance %>
     <div>
@@ -46,7 +47,7 @@
         <% else %>
           <dt><strong> Valor: <%= price_min %> </strong></dt>
         <% end %>
-      
+        <dt><strong> Prazo: <%= deadline %> </strong></dt>
         <dd><strong> <%= link_to carrier.brand_name, carrier_path(carrier) %> </strong></dd>
         <dd> Sede: <%= carrier.city %> - <%= carrier.state %> </dd>
         <dd> Documento: <%= carrier.registration_number %> </dd>
