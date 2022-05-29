@@ -23,7 +23,7 @@ class KilometersController < ApplicationController
   private
 
   def calculate_initial_kilometer
-    @price_kilometers = Kilometer.all
+    @price_kilometers = Kilometer.where(carrier_id: Carrier.find(params[:carrier_id]))
     if @price_kilometers.any?
       @initial_kilometer = Kilometer.last.final_kilometer
     else

@@ -93,11 +93,11 @@ describe 'Usuário busca orçamentos' do
     expect(page).to have_link('R2 Logistica', href: carrier_path(Carrier.find_by(brand_name: 'R2 Logistica')))
     expect(page).to have_content('Sede: Fortaleza - CE')
     expect(page).to have_content('Documento: 18519324000104')
+    expect(page).to have_link('Criar Ordem de Serviço', count:2)
     expect(page).not_to have_content('Valor: 9000')
     expect(page).not_to have_content('Prazo: 3')
     expect(page).not_to have_link('LT LOG', href: carrier_path(Carrier.find_by(brand_name: 'LT LOG')))
     expect(page).not_to have_content('Sede: Nova Iguaçu - RJ')
     expect(page).not_to have_content('Documento: 16443956000106')
-
   end
 end

@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      order_service: 'Ordem de Serviço'
+    attributes:
+      order_service:
+        search_address: 'Endereço'
+        search_city: 'Cidade'
+        search_state: 'Estado'
+        product_code: 'Código do Produto'
+        delivery_address: 'Endereço'
+        delivery_city: 'Cidade'
+        delivery_state: 'Estado'
+        name: 'Nome'
+        cpf: 'CPF'

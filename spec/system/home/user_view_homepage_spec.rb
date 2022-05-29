@@ -12,6 +12,7 @@ describe 'Usuário visita tela inicial' do
     expect(page).to have_content('Empresa especializada em gestão de transportadoras')
     expect(page).to have_link('Cadastrar Transportadora', href: new_carrier_path)
     expect(page).to have_link('Fazer Orçamento', href: budget_carriers_path )
+    expect(page).to have_link('Ordens de Serviço', href: order_services_path )
   end
 
   it 'e vê as transportadoras cadastradas' do

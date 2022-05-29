@@ -1,6 +1,10 @@
 pt-BR:
   enabled: 'Ativada'
   disabled: 'Desativada'
+  pending: 'Pendente'
+  refused: 'Recusada'
+  accepted: 'Aceita'
+  finished: 'Finalizada'
   
   
     

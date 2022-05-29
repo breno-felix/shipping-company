@@ -1,7 +1,7 @@
 class DeadlinesController < ApplicationController
   def index
     @carrier = Carrier.find(params[:carrier_id])
-    @deadlines = Deadline.all
+    @deadlines = Deadline.where(carrier_id: Carrier.find(params[:carrier_id]))
   end
 
   def new
@@ -28,7 +28,7 @@ class DeadlinesController < ApplicationController
   private
 
   def calculate_initial_kilometer
-    @deadlines = Deadline.all
+    @deadlines = Deadline.where(carrier_id: Carrier.find(params[:carrier_id]))
     if @deadlines.any?
       @initial_kilometer = Deadline.last.final_kilometer
     else

@@ -24,7 +24,7 @@ class VolumesController < ApplicationController
   private
 
   def calculate_initial_volume
-    @price_volumes = Volume.all
+    @price_volumes = Volume.where(carrier_id: Carrier.find(params[:carrier_id]))
     if @price_volumes.any?
       @initial_volume = Volume.last.final_volume
     else

@@ -24,7 +24,7 @@ class WeightsController < ApplicationController
   private
 
   def calculate_initial_weight
-    @price_weights = Weight.all
+    @price_weights = Weight.where(carrier_id: Carrier.find(params[:carrier_id]))
     if @price_weights.any?
       @initial_weight = Weight.last.final_weight
     else

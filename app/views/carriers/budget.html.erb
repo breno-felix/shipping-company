@@ -40,17 +40,17 @@
     <% deadline = @deadlines.find_by(carrier: carrier).deadline %>
     <% price_min = @distances.find_by(carrier: carrier).price_km %>
     <% price = p.price_km * @distance %>
+    <% if price_min > price %>
+      <% price = price_min %>
+    <% end %>
     <div>
       <dl>
-        <% if price >= price_min %>
-          <dt><strong> Valor: <%= price %> </strong></dt>
-        <% else %>
-          <dt><strong> Valor: <%= price_min %> </strong></dt>
-        <% end %>
+        <dt><strong> Valor: <%= price %> </strong></dt>  
         <dt><strong> Prazo: <%= deadline %> </strong></dt>
         <dd><strong> <%= link_to carrier.brand_name, carrier_path(carrier) %> </strong></dd>
         <dd> Sede: <%= carrier.city %> - <%= carrier.state %> </dd>
         <dd> Documento: <%= carrier.registration_number %> </dd>
+        <dd> <%= link_to "Criar Ordem de Serviço", new_carrier_order_service_path(carrier, volume: @volume, weight: @weight, distance: @distance, price: price, deadline: deadline) %></dd> 
       </dl>
     </div> 
   <% end %>

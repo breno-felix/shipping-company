@@ -1,0 +1,20 @@
+<h1>Ordens de Serviço</h1>
+
+<% @order_services.each do |os| %>
+  <div>
+    <dl>
+      <dt> Ordem de Serviço <strong><%= os.code %></strong> </dt>
+      <dd><strong> <%= link_to os.carrier.brand_name, carrier_path(os.carrier) %> </strong></dd>
+      <dd>Frete de <%= os.distance %>Km de distância com item de <%= os.volume %>m² e <%= os.weight %>Kg</dd>
+      <dd>Valor: <%= os.price %></dd>
+      <dd>Prazo: <%= os.deadline %></dd>
+      <dd>Endereço para Retirada: <%= os.search_address %> - <%= os.search_city %> - <%= os.search_state %></dd>
+      <dd>Endereço para Entrega: <%= os.delivery_address %> - <%= os.delivery_city %> - <%= os.delivery_state %></dd>
+      <dd>Status: <%= I18n.t(os.status) %></dd>   
+    </dl>    
+  </div> 
+<% end %>
+
+<% if @order_services.empty? %>
+  <p>Não existe Ordem de Serviço cadastradas</p>
+<% end %>

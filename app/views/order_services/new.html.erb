@@ -1,0 +1,64 @@
+<h1>Criar Ordem de Serviço</h1> 
+
+<% if(@order_service.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @order_service.errors.full_messages.each do |msg| %>
+        <li> <%=msg%> </li>
+      <% end %>
+    </ul>
+<% end %>
+
+<%= form_with(model: [:carrier, @order_service]) do |f| %>
+  <h4>Dados para a retirada do produto</h4>
+  <div id="search">
+    <%= f.label :search_address %>
+    <%= f.text_field :search_address %>
+ 
+    <%= f.label :search_city %>
+    <%= f.text_field :search_city %>
+  
+    <%= f.label :search_state %>
+    <%= f.text_field :search_state %>
+ 
+    <%= f.label :product_code %>
+    <%= f.text_field :product_code %>
+  </div>
+  <div>
+    <%= f.hidden_field :volume, value: @volume %>
+  </div>
+  <div>
+    <%= f.hidden_field :weight, value: @weight %>
+  </div>
+  <h4>Dados para a entrega do produto</h4>
+  <div id="delivery">
+    <%= f.label :delivery_address %>
+    <%= f.text_field :delivery_address %>
+
+    <%= f.label :delivery_city %>
+    <%= f.text_field :delivery_city %>
+  
+    <%= f.label :delivery_state %>
+    <%= f.text_field :delivery_state %>
+  </div>
+  <div>
+    <%= f.hidden_field :distance, value: @distance %>
+  </div>
+  <div>
+    <%= f.hidden_field :price, value: @price %>
+  </div>
+  <div>
+    <%= f.hidden_field :deadline, value: @deadline %>
+  </div>
+  <h4>Dados do Destinatário</h4>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  
+    <%= f.label :cpf %>
+    <%= f.text_field :cpf %>
+  </div>
+  
+  <%= f.submit 'Enviar' %>
+
+<% end %>
