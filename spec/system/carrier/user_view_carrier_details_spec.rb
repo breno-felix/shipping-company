@@ -11,7 +11,6 @@ describe 'Usuário vê detalhes da transportadora' do
     visit root_path
     click_on 'RV Express'
     # Assert
-    
     expect(page).to have_link('Preços', href: carrier_prices_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_link('Prazo', href: carrier_deadlines_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_link('Veículos', href: carrier_vehicles_path(Carrier.find_by(brand_name: 'RV Express')))

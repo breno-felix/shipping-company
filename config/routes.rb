@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :vehicles, only: [:index, :new, :create]
     resources :order_services, only: [:new, :create]
     resources :update_order_services, only: [:index]
+    patch :accepted, on: :member
+    patch :refused, on: :member  
   end
   resources :order_services, only: [:index]
 end

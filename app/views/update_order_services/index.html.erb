@@ -1,0 +1,31 @@
+<h3>
+  <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
+</h3>
+
+<h3> Ordens de Serviço </h3>
+
+<% @order_services.each do |os| %>
+  <div>  
+    <dl>
+      <dt> Ordem de Serviço <%= os.code %> </dt>
+      <dt><strong> Status: <%= I18n.t(os.status) %> </strong></dt>
+      <dd> Frete de <%= os.distance %>Km de distância com item de <%= os.volume %>m² e <%= os.weight %>Kg </dd>
+      <dd> Valor: <%= os.price %> </dd>
+      <dd> Prazo: <%= os.deadline %> </dd>
+      <dd> Endereço para Retirada: <%= os.search_address %> - <%= os.search_city %> - <%= os.search_state %> </dd>
+      <dd> Código do Produto: <%= os.product_code %> </dd>
+      <dd> Endereço para Entrega: <%= os.delivery_address %> - <%= os.delivery_city %> - <%= os.delivery_state %> </dd>
+      <dd> Nome do Destinatário: <%= os.name %> </dd>
+      <dd> CPF do Destinatário: <%= os.cpf %> </dd>
+    </dl>
+    <% if os.status == 'pending' %>
+      <% carrier = os.carrier %>
+      <%= button_to 'Aceitar', accepted_carrier_path(carrier, code: os.code), { method: 'patch'} %>
+      <%= button_to 'Recusar', refused_carrier_path(carrier, code: os.code), { method: 'patch'} %>
+    <% end %>
+  </div> 
+<% end %>
+
+<% if @order_services.empty? %>
+  <p>Não existem Ordens de Serviço cadastradas</p>
+<% end %>
