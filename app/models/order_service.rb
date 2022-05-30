@@ -10,12 +10,12 @@ class OrderService < ApplicationRecord
   validates :cpf, length: { is: 11 }
   validates :cpf, numericality: true
 
-  before_validation :generate_code
+  before_validation :generate_code, on: :create
 
   private
 
   def generate_code
-    self.code = SecureRandom.alphanumeric(15).upcase
+      self.code = SecureRandom.alphanumeric(15).upcase
   end
 end
 

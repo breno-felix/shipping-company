@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      update_order_service: 'Atualização da Ordem de Serviço'
+    attributes:
+      update_order_service:
+        vehicle_id: 'Veículo'
+        vehicle: 'Veículo'
+        

@@ -28,4 +28,19 @@ class OrderServicesController < ApplicationController
   def index
     @order_services = OrderService.all
   end
+
+  def accepted
+    carrier = Carrier.find(params[:carrier_id])
+    order_service = OrderService.find(params[:id])
+    code = order_service.code
+    order_service.accepted!
+    redirect_to new_carrier_update_order_service_path(carrier, code: code)
+  end
+
+  def refused
+    carrier = Carrier.find(params[:carrier_id])
+    order_service = OrderService.find(params[:id])
+    order_service.refused!
+    redirect_to carrier_update_order_services_path(carrier)
+  end
 end

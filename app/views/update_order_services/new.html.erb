@@ -1,0 +1,22 @@
+<h3>
+  <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
+</h3>
+
+<h3> Selecione um Veículo para a Ordem de Serviço <%= @order_service.code %> </h3>
+
+<%= form_with(model: [:carrier, @update_order_service]) do |f| %>
+  <div> 
+    <%= f.label :vehicle_id %>
+    <%= f.collection_select :vehicle_id, @vehicles, :id, :full_description %>
+  </div>
+  <div>
+    <%= f.hidden_field :order_service_id, value: @order_service_id %>
+  </div>
+  
+  <% if @update_order_services.any? %>
+
+  <% end %>
+
+  <%= f.submit 'Enviar' %>
+
+<% end %>
