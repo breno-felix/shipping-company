@@ -52,6 +52,14 @@ class CarriersController < ApplicationController
 
   end
 
+  def search_order
+    @carrier = Carrier.find(params[:id])
+    @code = params["code"]
+    @order_service = OrderService.find_by(code: @code)
+    @update_order_services = UpdateOrderService.includes(:order_service).where(order_service: {code: @code})
+    
+  end
+
   private
 
   def volume

@@ -1,0 +1,53 @@
+<h3>
+  <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
+</h3>
+
+<h4>Atualizar Ordem de Serviço</h4>
+
+<%= form_with(url: search_order_carrier_path(@carrier), method: :get) do |f| %>
+  <%= f.label :code, 'Buscar Ordem de Serviço' %>
+  <%= f.text_field :code %>
+  <%= f.submit 'Buscar'%>
+<% end %>
+
+<% if @update_order_services.any? %>
+  <div>
+    <dl>
+      <dt><strong> Ordem de Serviço <%= @code %> </strong></dt>  
+      <dd> Endereço para Retirada: <%= @order_service.search_address %> - <%= @order_service.search_city %> - <%= @order_service.search_state %> </dd>
+      <dd> Endereço para Entrega: <%= @order_service.delivery_address %> - <%= @order_service.delivery_city %> - <%= @order_service.delivery_state %> </dd>
+      <dd> Status: <%= I18n.t(@order_service.status) %></dd>  
+      <dd> Veículo: <%= @update_order_services.last.vehicle.brand %> <%= @update_order_services.last.vehicle.model %> - <%= @update_order_services.last.vehicle.plate %></dd>
+    </dl>
+  </div> 
+
+  <h4> <caption> Tabela de atualizações da entrega </caption> </h4>
+  <table class="table_updates" id="table_updates_id">
+    <thead>
+      <tr>
+        <th>Data e Hora</th>
+        <th>Mensagem de atualização</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @update_order_services.each do |up| %>
+        <tr>
+          <td> <%= I18n.l(up.created_at) %> </td>
+          <td> <%= up.msg_update %> </td>
+          <td> <%= up.latitude %> </td>
+          <td> <%= up.longitude %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "Atualizar", new_carrier_update_order_service_path(@carrier, code: @code) %>
+<% elsif @order_service == nil %>
+  <p> Ordem de Serviço não existe </p>
+
+<% elsif @order_service.status == "accepted" %>
+  <%= link_to "Vincular Veículo", new_carrier_update_order_service_path(@carrier, code: @code) %>
+<% else %>
+  <p> Ordem de Serviço não foi aceita pela Transportadora </p>
+<% end %>

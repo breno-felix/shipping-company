@@ -14,7 +14,8 @@ Rails.application.routes.draw do
       patch :accepted, on: :member
       patch :refused, on: :member 
     end
-    resources :update_order_services, only: [:index, :new, :create] 
+    resources :update_order_services, only: [:index, :new, :create]
+    get 'search_order', on: :member
   end
   resources :order_services, only: [:index]
 end

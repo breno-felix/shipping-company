@@ -6,4 +6,5 @@ pt-BR:
       update_order_service:
         vehicle_id: 'Veículo'
         vehicle: 'Veículo'
+        msg_update: 'Mensagem de Atualização'
         
