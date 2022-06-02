@@ -20,7 +20,7 @@
     </dl>
     <% if os.status == 'pending' %>
       <% carrier = os.carrier %>
-      <%= button_to 'Aceitar', accepted_carrier_order_service_path(carrier, os), { method: 'patch'} %>
+      <%= link_to 'Aceitar', edit_carrier_order_service_path(carrier, os) %>
       <%= button_to 'Recusar', refused_carrier_order_service_path(carrier, os), { method: 'patch'} %>
     <% end %>
   </div> 

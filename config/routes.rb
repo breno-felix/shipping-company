@@ -10,12 +10,15 @@ Rails.application.routes.draw do
     resources :kilometers, only: [:new, :create]
     resources :deadlines, only: [:index, :new, :create]
     resources :vehicles, only: [:index, :new, :create]
-    resources :order_services, only: [:new, :create] do
+    resources :order_services, only: [:new, :create, :edit, :update] do
       patch :accepted, on: :member
       patch :refused, on: :member 
+      
     end
-    resources :update_order_services, only: [:index, :new, :create]
-    get 'search_order', on: :member
+    resources :update_order_services, only: [:index, :new, :create] do
+      get 'search', on: :collection
+    end
+    
   end
   resources :order_services, only: [:index]
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_30_134408) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_02_184222) do
   create_table "carriers", force: :cascade do |t|
     t.string "brand_name"
     t.string "corporate_name"
@@ -64,7 +64,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_134408) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vehicle_id"
     t.index ["carrier_id"], name: "index_order_services_on_carrier_id"
+    t.index ["vehicle_id"], name: "index_order_services_on_vehicle_id"
   end
 
   create_table "price_volumes", force: :cascade do |t|
@@ -90,17 +92,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_134408) do
   end
 
   create_table "update_order_services", force: :cascade do |t|
-    t.integer "vehicle_id", null: false
     t.integer "order_service_id", null: false
-    t.integer "carrier_id", null: false
     t.text "msg_update", default: "Pedido Aceito"
     t.string "latitude", default: "0"
     t.string "longitude", default: "0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["carrier_id"], name: "index_update_order_services_on_carrier_id"
     t.index ["order_service_id"], name: "index_update_order_services_on_order_service_id"
-    t.index ["vehicle_id"], name: "index_update_order_services_on_vehicle_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
@@ -138,11 +136,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_134408) do
   add_foreign_key "deadlines", "carriers"
   add_foreign_key "kilometers", "carriers"
   add_foreign_key "order_services", "carriers"
+  add_foreign_key "order_services", "vehicles"
   add_foreign_key "price_volumes", "carriers"
   add_foreign_key "prices", "carriers"
-  add_foreign_key "update_order_services", "carriers"
   add_foreign_key "update_order_services", "order_services"
-  add_foreign_key "update_order_services", "vehicles"
   add_foreign_key "vehicles", "carriers"
   add_foreign_key "volumes", "carriers"
   add_foreign_key "weights", "carriers"

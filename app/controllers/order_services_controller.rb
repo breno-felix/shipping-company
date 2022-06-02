@@ -29,18 +29,31 @@ class OrderServicesController < ApplicationController
     @order_services = OrderService.all
   end
 
-  def accepted
-    carrier = Carrier.find(params[:carrier_id])
-    order_service = OrderService.find(params[:id])
-    code = order_service.code
-    order_service.accepted!
-    redirect_to new_carrier_update_order_service_path(carrier, code: code)
+  def edit
+    @carrier = Carrier.find(params[:carrier_id])
+    @order_service = OrderService.find(params[:id])
+    @vehicles = Vehicle.where(carrier_id: @carrier)
+  end
+
+  def update
+    @carrier = Carrier.find(params[:carrier_id])
+    @order_service = OrderService.find(params[:id])
+
+    order_service_params = params.require(:order_service).permit(:vehicle_id)
+
+    if @order_service.update(order_service_params)
+      @order_service.accepted!
+      redirect_to carrier_update_order_services_path(@carrier), notice: 'Ordem de serviço aceita com sucesso'
+    else
+      flash.now[:notice] = "Erro!"
+      render 'edit'
+    end
   end
 
   def refused
     carrier = Carrier.find(params[:carrier_id])
     order_service = OrderService.find(params[:id])
     order_service.refused!
-    redirect_to carrier_update_order_services_path(carrier)
+    redirect_to carrier_update_order_services_path(carrier), notice: 'Ordem de serviço recusada com sucesso'
   end
 end

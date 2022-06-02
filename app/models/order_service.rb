@@ -1,5 +1,7 @@
 class OrderService < ApplicationRecord
   belongs_to :carrier
+  belongs_to :vehicle
+  
   enum status: { pending: 0, refused: 5, accepted: 10, finished: 15 }
 
   validates :search_address, :search_city, :search_state, :product_code, :volume, :weight,

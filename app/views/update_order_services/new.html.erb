@@ -1,37 +1,25 @@
 <h3>
   <%= link_to @carrier.brand_name, carrier_path(@carrier) %>
 </h3>
-
+<% if @order_service != nil%>
+  <h3> Atualizar Ordem de Serviço <%= @order_service.code %> </h3>
+<% end %>
 <%= form_with(model: [:carrier, @update_order_service]) do |f| %> 
-  <% if @update_order_services.any? %>
-    <h3> Atualizar Ordem de Serviço <%= @order_service.code %> </h3>
-    <div> 
-      <%= f.label :msg_update %>
-      <%= f.text_field :msg_update %>
-    </div>
-    <div> 
-      <%= f.label :latitude %>
-      <%= f.text_field :latitude %>
-    </div>
-    <div> 
-      <%= f.label :longitude %>
-      <%= f.text_field :longitude %>
-    </div>
-    <div>
-      <%= f.hidden_field :order_service_id, value: @order_service_id %>
-    </div>
-    <div>
-      <%= f.hidden_field :vehicle_id, value: @vehicle_id.vehicle_id %>
-    </div>
-  <% else %>
-    <h3> Selecione um Veículo para a Ordem de Serviço <%= @order_service.code %> </h3>
-    <div> 
-      <%= f.label :vehicle_id %>
-      <%= f.collection_select :vehicle_id, @vehicles, :id, :full_description %>
-    </div>
-    <div>
-      <%= f.hidden_field :order_service_id, value: @order_service_id %>
-    </div>
-  <% end %>
+  
+  <div> 
+    <%= f.label :msg_update %>
+    <%= f.text_field :msg_update %>
+  </div>
+  <div> 
+    <%= f.label :latitude %>
+    <%= f.text_field :latitude %>
+  </div>
+  <div> 
+    <%= f.label :longitude %>
+    <%= f.text_field :longitude %>
+  </div>
+  <div>
+    <%= f.hidden_field :order_service_id, value: @order_service.id %>
+  </div>
   <%= f.submit 'Enviar' %>
 <% end %>
