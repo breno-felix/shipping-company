@@ -56,4 +56,11 @@ class OrderServicesController < ApplicationController
     order_service.refused!
     redirect_to carrier_update_order_services_path(carrier), notice: 'Ordem de serviço recusada com sucesso'
   end
+
+  def finished
+    carrier = Carrier.find(params[:carrier_id])
+    order_service = OrderService.find(params[:id])
+    order_service.finished!
+    redirect_to search_carrier_update_order_services_path(carrier), notice: 'Ordem de serviço finalizada com sucesso'
+  end
 end

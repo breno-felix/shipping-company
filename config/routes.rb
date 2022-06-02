@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :order_services, only: [:new, :create, :edit, :update] do
       patch :accepted, on: :member
       patch :refused, on: :member 
+      patch :finished, on: :member 
       
     end
     resources :update_order_services, only: [:index, :new, :create] do

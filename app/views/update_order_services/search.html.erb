@@ -42,7 +42,10 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "Atualizar", new_carrier_update_order_service_path(@carrier, code: @code) %>
+  <% if @order_service.status == "accepted" %>
+    <%= link_to "Atualizar", new_carrier_update_order_service_path(@carrier, code: @code) %>
+    <%= button_to 'Finalzar', finished_carrier_order_service_path(@carrier, @order_service), { method: 'patch'} %>
+  <% end %>
 <% elsif @order_service == nil && @code != nil%>
   <p> Ordem de Serviço não existe </p>
 <% elsif @order_service == nil && @code == nil%>  
