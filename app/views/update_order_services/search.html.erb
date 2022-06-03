@@ -10,7 +10,7 @@
   <%= f.submit 'Buscar'%>
 <% end %>
 
-<% if @update_order_services.any? %>
+<% if @order_service != nil %>
   <div>
     <dl>
       <dt><strong> Ordem de Serviço <%= @code %> </strong></dt>  
@@ -20,7 +20,8 @@
       <dd> Veículo: <%= @order_service.vehicle.brand %> <%= @order_service.vehicle.model %> - <%= @order_service.vehicle.plate %></dd>
     </dl>
   </div> 
-
+<% end %>  
+<% if @update_order_services.any? %>
   <h4> <caption> Tabela de atualizações da entrega </caption> </h4>
   <table class="table_updates" id="table_updates_id">
     <thead>
@@ -44,7 +45,7 @@
   </table>
   <% if @order_service.status == "accepted" %>
     <%= link_to "Atualizar", new_carrier_update_order_service_path(@carrier, code: @code) %>
-    <%= button_to 'Finalzar', finished_carrier_order_service_path(@carrier, @order_service), { method: 'patch'} %>
+    <%= button_to 'Finalizar', finished_carrier_order_service_path(@carrier, @order_service), { method: 'patch'} %>
   <% end %>
 <% elsif @order_service == nil && @code != nil%>
   <p> Ordem de Serviço não existe </p>

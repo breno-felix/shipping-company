@@ -13,3 +13,5 @@ pt-BR:
         delivery_state: 'Estado'
         name: 'Nome'
         cpf: 'CPF'
+        vehicle_id: 'Veículo'
+        vehicle: 'Veículo'

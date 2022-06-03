@@ -15,7 +15,7 @@ describe 'Usuário vê detalhes da transportadora' do
     expect(page).to have_link('Prazo', href: carrier_deadlines_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_link('Veículos', href: carrier_vehicles_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_link('Ordens de Serviço', href: carrier_update_order_services_path(Carrier.find_by(brand_name: 'RV Express')))
-    expect(page).to have_link('Atualizar Ordem de Serviço', href: search_order_carrier_path(Carrier.find_by(brand_name: 'RV Express')))
+    expect(page).to have_link('Atualizar Ordem de Serviço', href: search_carrier_update_order_services_path(Carrier.find_by(brand_name: 'RV Express')))
     expect(page).to have_content('Transportadora RV Express')
     expect(page).to have_content('RV Express LTDA')
     expect(page).to have_content('Documento: 19950592000130')

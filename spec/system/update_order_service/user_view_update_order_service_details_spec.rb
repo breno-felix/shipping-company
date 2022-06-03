@@ -72,7 +72,7 @@ describe 'Usuário vê detalhes das Ordens de Serviço' do
     expect(page).to have_content('Não existem Ordens de Serviço cadastradas')
   end
 
-  it 'e aceita a Ordem de Serviço por um botão' do
+  it 'e aceita a Ordem de Serviço por um botão e vincula veículo' do
     # Arrange
       carrier = Carrier.create!(corporate_name: 'RV Express LTDA', brand_name: 'RV Express', 
                       registration_number: '19950592000130', full_address: 'Rua Áustria, 375',

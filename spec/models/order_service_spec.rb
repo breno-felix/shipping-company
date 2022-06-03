@@ -8,11 +8,13 @@ RSpec.describe OrderService, type: :model do
                       registration_number: '19950592000130', full_address: 'Rua Áustria, 375',
                       city: 'Cachoeirinha', state: 'RS', email_domain: 'rvexpress.com',
                       status: 'enabled')
+      vehicle = Vehicle.create!(brand: 'Volvo', model: 'VM 270', year: '2021', plate: 'LSN4I49',
+                    capacity: '35000', carrier: carrier)
       order_service = OrderService.new(search_address: 'R. dos Andradas, 1001', search_city: 'Porto Alegre',
                           search_state: 'RS', product_code: 'ABC123', volume: 1, weight: 2, 
                           delivery_address: 'R. Luís Augusto Branco, 97', delivery_city: 'Ipê',
                           delivery_state: 'RS', distance: 150, price: 8000, deadline: 2,
-                          name: 'Breno Felix', cpf: '02398746509', carrier: carrier) 
+                          name: 'Breno Felix', cpf: '02398746509', carrier: carrier, vehicle: vehicle) 
       # Act
       order_service.save!
       result = order_service.code
@@ -30,17 +32,21 @@ RSpec.describe OrderService, type: :model do
       carrier_second = Carrier.create!(corporate_name: 'R2 Logistica LTDA', brand_name: 'R2 Logistica', 
                       registration_number: '18519324000104', full_address: 'Rua Valdir Dantas, 440',
                       city: 'Fortaleza', state: 'CE', email_domain: 'r2logistica.com.br',
-                      status: 'enabled')       
+                      status: 'enabled') 
+      vehicle_first = Vehicle.create!(brand: 'Volvo', model: 'VM 270', year: '2021', plate: 'LSN4I49',
+                      capacity: '35000', carrier: carrier_first)
+      vehicle_second = Vehicle.create!(brand: 'Volvo', model: 'VM 270', year: '2021', plate: 'OZN7I87',
+                        capacity: '35000', carrier: carrier_second)
       order_service_first = OrderService.create!(search_address: 'R. dos Andradas, 1001', search_city: 'Porto Alegre',
                           search_state: 'RS', product_code: 'ABC123', volume: 1, weight: 2, 
                           delivery_address: 'R. Luís Augusto Branco, 97', delivery_city: 'Ipê',
                           delivery_state: 'RS', distance: 150, price: 8000, deadline: 2,
-                          name: 'Breno Felix', cpf: '02398746509', carrier: carrier_first) 
+                          name: 'Breno Felix', cpf: '02398746509', carrier: carrier_first, vehicle: vehicle_first) 
       order_service_second = OrderService.new(search_address: 'R. dos Andradas, 1001', search_city: 'Porto Alegre',
                           search_state: 'RS', product_code: 'ABC123', volume: 1, weight: 2, 
                           delivery_address: 'R. Luís Augusto Branco, 97', delivery_city: 'Ipê',
                           delivery_state: 'RS', distance: 150, price: 8000, deadline: 2,
-                          name: 'Breno Felix', cpf: '02398746509', carrier: carrier_second)
+                          name: 'Breno Felix', cpf: '02398746509', carrier: carrier_second, vehicle: vehicle_second)
       # Act
       order_service_second.save!
       result = order_service_second.code
@@ -244,5 +250,39 @@ RSpec.describe OrderService, type: :model do
         expect(result).to be true
       end
     end  
+
+    context 'vehicle must belong to the carrier that received the Order Servicee' do
+      it "and is false when vehicle does not belong" do
+        # Arrange
+        carrier_first = Carrier.create!(corporate_name: 'RV Express LTDA', brand_name: 'RV Express', 
+                      registration_number: '19950592000130', full_address: 'Rua Áustria, 375',
+                      city: 'Cachoeirinha', state: 'RS', email_domain: 'rvexpress.com',
+                      status: 'enabled')
+        carrier_second = Carrier.create!(corporate_name: 'R2 Logistica LTDA', brand_name: 'R2 Logistica', 
+                      registration_number: '18519324000104', full_address: 'Rua Valdir Dantas, 440',
+                      city: 'Fortaleza', state: 'CE', email_domain: 'r2logistica.com.br',
+                      status: 'enabled') 
+        vehicle_first = Vehicle.create!(brand: 'Volvo', model: 'VM 270', year: '2021', plate: 'LSN4I49',
+                      capacity: '35000', carrier: carrier_first)
+        vehicle_second = Vehicle.create!(brand: 'Volvo', model: 'VM 270', year: '2021', plate: 'OZN7I87',
+                        capacity: '35000', carrier: carrier_second)
+        order_service = OrderService.new(carrier: carrier_second, vehicle: vehicle_first)
+        # Act
+        order_service.valid?
+        result = order_service.errors.include?(:vehicle) 
+        # Assert
+        expect(result).to be true
+      end
+      
+      it "and is true when vehicle belongs" do
+        # Arrange
+        order_service = OrderService.new(cpf: '023987465099')
+        # Act
+        order_service.valid?
+        result = order_service.errors.include?(:cpf) 
+        # Assert
+        expect(result).to be true
+      end
+    end 
   end
 end
